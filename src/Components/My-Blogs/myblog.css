@@ -1,0 +1,11 @@
+.my-blog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin-top: 80px;
+}
+
+
+/* Add any additional styling you need */
