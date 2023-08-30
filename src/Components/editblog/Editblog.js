@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
 
 const EditBlog = () => {
-  const Base_URL = "http://localhost:9000";
+  const Base_URL = "https://blogger-ayru.onrender.com";
   const { id } = useParams();
   const navigate = useNavigate();
   const [message,setMessage]=("")

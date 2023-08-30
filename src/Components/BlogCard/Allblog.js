@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export default function AllBlog({title,description,image,userName,time,id,isUser}) {
   const navigate = useNavigate();
-  const Base_URL= "http://localhost:9000"
+  const Base_URL= "https://blogger-ayru.onrender.com"
   const handleEdit = () => {
     navigate(`/edit-blog/${id}`)
   }

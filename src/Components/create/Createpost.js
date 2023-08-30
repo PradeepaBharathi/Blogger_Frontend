@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import './createpost.css'
 const Createpost= () => {
     const id = localStorage.getItem("userId");
-    const Base_URL = "http://localhost:9000"
+    const Base_URL = "https://blogger-ayru.onrender.com"
   const navigate = useNavigate();
   const[message,setMessage]=useState("")
   const [inputs, setInputs] = useState({
