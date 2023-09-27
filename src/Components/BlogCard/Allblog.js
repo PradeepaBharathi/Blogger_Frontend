@@ -38,6 +38,7 @@ export default function AllBlog({
     }
   };
   const firstLetter = userName ? userName[0].toUpperCase() : "";
+  console.log(firstLetter);
   return (
     <Card className="individual-blog" sx={{ maxWidth: 345 }}>
       {isUser && (
