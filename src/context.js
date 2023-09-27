@@ -145,7 +145,7 @@ export const GlobalProvider = ({ children }) => {
   
  
   
-const createBlogs = async (req, res) => {
+  const createBlogs = async (req, res) => {
   try {
     const response = await axios.get(`${Base_URL}/add-blog`, {
       title: inputs.title,
