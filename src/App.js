@@ -1,38 +1,48 @@
 import './App.css';
 import Account from './Components/account/Account.js';
-
 import { GlobalProvider } from './context';
-import { BrowserRouter ,Routes,Route, Navigate, Outlet} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Header from './Components/header/Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Createpost from './Components/create/Createpost';
 import FirstPage from './Components/FirstPage/FirstPage';
 import Myblog from './Components/My-Blogs/Myblog';
 import UserBlog from './Components/userblog/UserBlog';
 import Editblog from './Components/editblog/Editblog';
 
-
-const PrivateRoute = ({isAuthenticated,...props}) => {
-  return isAuthenticated ? 
+const PrivateRoute = ({ isAuthenticated, ...props }) => {
+  return isAuthenticated ? (
     <>
-       <Header/>
-      <Outlet/>
+      <Header />
+      <Outlet />
     </>
-    :
+  ) : (
     <Navigate replace to='/login' />
+  );
 }
-function App()
 
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-{
-  const [isAuthenticated,isUserAutenticated]=useState(false)
+  // Rehydrate authentication state on app load
+  useEffect(() => {
+    const storedAuthState = localStorage.getItem('isAuthenticated');
+    if (storedAuthState === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleUserAuthenticated = (authState) => {
+    setIsAuthenticated(authState);
+    localStorage.setItem('isAuthenticated', authState);
+  }
+
   return (
     <GlobalProvider>
       <BrowserRouter>
-       
         <div className="App">
           <Routes>
-            <Route path='/login' element={<Account isUserAutenticated={isUserAutenticated} />}/>
+            <Route path='/login' element={<Account isUserAuthenticated={handleUserAuthenticated} />} />
             <Route path='/' element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
               <Route path="/" element={<FirstPage />} />
             </Route>
@@ -47,12 +57,13 @@ function App()
             </Route>
             <Route path='/create-blog' element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
               <Route path="/create-blog" element={<Createpost />} />
-             </Route>
-            </Routes>
-           </div>
-        </BrowserRouter>
-        </GlobalProvider>
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </GlobalProvider>
   );
 }
 
 export default App;
+
