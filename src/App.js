@@ -26,7 +26,7 @@ function App() {
 
   // Rehydrate authentication state on app load
   useEffect(() => {
-    const storedAuthState = localStorage.getItem('isAuthenticated');
+    const storedAuthState = localStorage.getItem('userId');
     if (storedAuthState === 'true') {
       setIsAuthenticated(true);
     }
